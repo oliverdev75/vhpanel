@@ -2,9 +2,27 @@
 @import "tailwindcss";
 
 @theme {
+    --color-site: #0281C7;
     --color-link: #0063C0;
+    --color-btn-hover: #0367A1;
+    --color-btn-active: #075785;
 }
 
-* {
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    width: 100vw;
     font-family: 'Inter';
+    display: flex;
+    flex-direction: column;
+}
+
+#root {
+    min-height: 100vh;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
