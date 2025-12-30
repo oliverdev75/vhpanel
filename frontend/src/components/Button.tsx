@@ -5,20 +5,22 @@ interface Props {
     onClick: EventHandler<any>,
     onDoubleClick: EventHandler<any>,
     text: boolean,
+    className: string,
     full: boolean,
     icon: string | null,
     iconPos: 'left' | 'right' | null,
+    iconClass: 'string',
     children: ReactNode | null,
 }
 
-function Button ({ onClick, onDoubleClick, text = false, icon, iconPos, full = false, children }: Props) {
+function Button ({ onClick, onDoubleClick, text = false, icon, iconPos, iconClass, className, full = false, children }: Props) {
 
-    const hasLeftIcon = () => icon && (!iconPos || iconPos === 'left') && <Icon>{icon}</Icon>
-    const hasRightIcon = () => icon && iconPos === 'right' && <Icon>{icon}</Icon>
+    const hasLeftIcon = () => icon && (!iconPos || iconPos === 'left') && <Icon className={iconClass}>{icon}</Icon>
+    const hasRightIcon = () => icon && iconPos === 'right' && <Icon className={iconClass}>{icon}</Icon>
 
     if (text) {
         return (
-            <button onClick={onClick} onDoubleClick={onDoubleClick} className="h-fit flex items-center hover:cursor-pointer">
+            <button onClick={onClick} onDoubleClick={onDoubleClick} className={`h-fit flex items-center hover:cursor-pointer ${className}`}>
                 {hasLeftIcon()}
                 {children && <span className="inline-flex items-center">{children}</span>}
                 {hasRightIcon()}
@@ -30,7 +32,7 @@ function Button ({ onClick, onDoubleClick, text = false, icon, iconPos, full = f
         <button
             onClick={onClick}
             onDoubleClick={onDoubleClick}
-            className={`bg-site text-white font-bold px-6 py-1.5 rounded-lg flex justify-center gap-2 ${!full && 'w-fit'} hover:cursor-pointer hover:bg-btn-hover active:bg-btn-active`}
+            className={`bg-site text-white font-bold px-6 py-1.5 rounded-lg flex justify-center gap-2 ${!full && 'w-fit'} hover:cursor-pointer hover:bg-btn-hover active:bg-btn-active ${className}`}
         >
             {hasLeftIcon()}
             <span>{children}</span>
