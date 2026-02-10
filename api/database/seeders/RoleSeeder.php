@@ -22,12 +22,12 @@ class RoleSeeder extends Seeder
 
             if ($name == "client") {
                 for ($i = 1; $i <= 6; $i++) {
-                    $role->permissions()->associate($i);
+                    $role->permissions()->attach($i);
                 }
             } else {
-                $role->permissions()->associate(7);
-                $role->permissions()->associate(8);
-                $role->permissions()->associate(9);
+                $role->permissions()->attach(7);
+                $role->permissions()->attach(8);
+                $role->permissions()->attach(9);
             }
         }
     }

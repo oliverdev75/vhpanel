@@ -11,16 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('oses', function (Blueprint $table) {
+        Schema::create('oses_versions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('active_user_id')->nullable();
-            $table->string("short_name")->unique();
-            $table->string("name");
-            $table->string("type");
-            $table->string("os_type");
+            $table->unsignedBigInteger('os_id');
+            $table->string('version');
+            $table->boolean('stable')->default(1);
+            $table->boolean('lts')->default(0);
+            $table->string('codename');
             $table->timestamps();
-
-            $table->foreign('active_user_id')->references('id')->on('active_users');
         });
     }
 
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('oses');
+        Schema::dropIfExists('o_s_versions');
     }
 };

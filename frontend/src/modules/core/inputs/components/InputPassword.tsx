@@ -1,15 +1,18 @@
-import { useState } from "react"
-import Button from "@/components/Button"
-import Icon from "@/components/Icon"
+import { useState, type EventHandler } from "react"
+import Button from "@/modules/core/components/Button"
+import Icon from "@/modules/core/components/Icon"
 
 
 interface Props {
-    name: string,
+    value: any,
+    name?: string,
+    tabIndex?: number,
     visibility: boolean,
-    placeholder: string | null
+    placeholder: string | null,
+    onChange?: EventHandler<any>
 }
 
-function InputPassword ({ name, visibility = false, placeholder = null }: Props) {
+function InputPassword ({ value, name, visibility = false, placeholder = null, tabIndex, onChange }: Props) {
     const [style, setStyle] = useState<object>()
     const [type, setType] = useState("password")
     const [visibilityIcon, setVisibilityIcon] = useState("visibility")
@@ -36,16 +39,19 @@ function InputPassword ({ name, visibility = false, placeholder = null }: Props)
         <div style={style} className="px-3 py-1 rounded-lg border border-gray-300 flex items-center">
             <input
                 type={type}
-                name={name}
+                tabIndex={tabIndex || undefined}
+                value={value}
+                name={name || undefined}
                 {...(placeholder && { placeholder: placeholder })}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
+                onChange={onChange || undefined}
                 className="focus:outline-none"
             />
             {
                 visibility && (
                     <Button onClick={handleEyeClick} text>
-                        <Icon className="!text-[1.4rem] text-[#969696]">{visibilityIcon}</Icon>
+                        <Icon className="!text-[1.2rem] text-[#969696]">{visibilityIcon}</Icon>
                     </Button>
                 )
             }

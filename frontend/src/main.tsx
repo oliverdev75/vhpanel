@@ -1,7 +1,8 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { createBrowserRouter } from 'react-router'
+import { createBrowserRouter, redirect } from 'react-router'
 import { RouterProvider } from 'react-router'
+import AuthProvider from './contexts/AuthContext'
 import Login from './views/Login'
 import Layout from './layout/Layout'
 import Servers from './pages/Servers'
@@ -14,12 +15,16 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
-    element: <Layout />,
     path: "/",
+    element: <Layout />,
     children: [
       {
-        path: "/",
-        element: <Servers />
+        path: '',
+        loader: () => redirect('/servers')
+      },
+      {
+        path: "/servers",
+        element: <Servers />,
       },
       {
         path: "/settings",
@@ -31,6 +36,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>,
 )

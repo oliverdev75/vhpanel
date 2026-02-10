@@ -15,4 +15,9 @@ class OS extends Model
     {
         return $this->hasMany(Server::class);
     }
+
+    public function versions(): HasMany
+    {
+        return $this->hasMany(OSVersion::class);
+    }
 }

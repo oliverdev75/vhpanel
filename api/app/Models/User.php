@@ -19,6 +19,11 @@ class User extends Authenticatable
 
     protected $guarded = [];
 
+    protected $hidden = [
+        "password",
+        "remember_token"
+    ];
+
     /**
      * Get the attributes that should be cast.
      *
@@ -39,6 +44,11 @@ class User extends Authenticatable
 
     public function servers(): HasMany
     {
-        return $this->hasMany(Server::class);
+        return $this->hasMany(Server::class, 'active_user_id');
+    }
+
+    public function oses(): HasMany
+    {
+        return $this->hasMany(OS::class, 'active_user_id');
     }
 }
