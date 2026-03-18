@@ -32,7 +32,7 @@ function AppLink ({ route, action, name, icon, full }: Props) {
     return (
         <button
             onClick={action}
-            className="w-full px-3 py-2 inline-flex items-center gap-3 rounded-lg text-white hover:bg-[#028cd7] hover:cursor-pointer"
+            className={`w-full px-3 py-2 inline-flex ${!full && 'justify-center'} items-center gap-3 rounded-lg text-white hover:bg-[#028cd7] hover:cursor-pointer`}
         >
             <Icon className={makeIconClassName}>{icon}</Icon>
             {full && <span className={makeTextClassName}>{name}</span>}

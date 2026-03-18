@@ -51,7 +51,6 @@ function DeleteServerModal ({ visible, server, closeCallback }: Props) {
                 visible={visible}
                 closeCallback={closeCallback}
                 title={title()}
-                titleClass=""
             >
                 <Advice />
                 <div className="mt-4 flex gap-3 justify-end">

@@ -33,7 +33,7 @@ function Button ({ variant = 'primary', text = false, icon, iconPos, iconClass =
 
     if (text) {
         return (
-            <button type={type || undefined} onClick={onClick} onDoubleClick={onDoubleClick} className={`h-fit flex items-center hover:cursor-pointer${icon ? ' p-2 rounded-full hover:bg-gray-100' : ''}${className ? ` ${className}` : ''}`}>
+            <button type={type || undefined} onClick={onClick} onDoubleClick={onDoubleClick} className={`h-fit flex justify-center items-center hover:cursor-pointer${icon ? ' p-2 rounded-full hover:bg-gray-100' : ''}${className ? ` ${className}` : ''}`}>
                 {hasLeftIcon()}
                 {children && <span className="inline-flex items-center">{children}</span>}
                 {hasRightIcon()}

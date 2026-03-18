@@ -1,4 +1,4 @@
-import Button from "@/components/Button"
+import Icon from "@/components/Icon"
 import AppLink from "@/components/nav/AppLink"
 import Profile from "@/components/Profile"
 import type { NavLinkProps } from "../types"
@@ -43,7 +43,9 @@ function Navbar () {
                 <div className="h-full flex flex-col gap-10">
                     <div className={`flex ${isOpen ? 'gap-10' : 'justify-center'}`}>
                         {showBigLogo()}
-                        <Button icon={`${isOpen ? 'menu_open' : 'menu'}`} iconClass="text-white !text-4xl" text onClick={() => setIsOpen(!isOpen)} />
+                        <button onClick={() => setIsOpen(!isOpen)} className="px-2 rounded-lg hover:cursor-pointer hover:bg-[#028cd7]">
+                            <Icon className="text-white !text-4xl">{`${isOpen ? 'menu_open' : 'menu'}`}</Icon>
+                        </button>
                     </div>
                     <nav className="h-full flex flex-col justify-between">
                         <ul className="flex flex-col gap-2">
