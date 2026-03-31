@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Server;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -45,5 +46,12 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function servers(Request $request)
+    {
+        return response()->json([
+            'data' => Server::with('os_version.os', 'disks')->where('active_user_id', $request->user()->id)->get()
+        ]);
     }
 }

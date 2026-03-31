@@ -6,7 +6,7 @@ function useServers () {
     const destroy = async (id: number) => {
         const res = await del(`/servers/destroy/${id}`)
         if (res.status === 204) {
-
+            
         }
     }
 

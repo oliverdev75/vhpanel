@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Services\KVMService;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

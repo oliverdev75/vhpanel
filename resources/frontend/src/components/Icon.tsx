@@ -1,8 +1,9 @@
+import type { ReactNode } from "react"
 import * as OS from "./OSIcons"
 
 interface Props {
     className?: string,
-    children: string
+    children: ReactNode
 }
 
 function Icon ({ className, children }: Props) {

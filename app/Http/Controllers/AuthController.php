@@ -38,11 +38,4 @@ class AuthController extends Controller
             'data' => $request->user()
         ]);
     }
-
-    public function servers(Request $request)
-    {
-        return response()->json([
-            'data' => Server::with('os_version.os', 'disks')->where('active_user_id', $request->user()->id)->get()
-        ]);
-    }
 }

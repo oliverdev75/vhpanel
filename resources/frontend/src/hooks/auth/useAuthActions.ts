@@ -14,7 +14,7 @@ const useAuthActions = () => {
         console.log(data)
         localStorage.setItem('token', data.token)
 
-        const user = await get('/user')
+        const user = await get('/auth/me')
         console.log(user)
 
         localStorage.setItem('user', JSON.stringify(user.data.data))

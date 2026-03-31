@@ -5,7 +5,7 @@ import { RouterProvider } from 'react-router'
 import AuthProvider from './contexts/AuthContext'
 import Login from './views/Login'
 import Layout from './layout/Layout'
-import Servers from './pages/Servers'
+import ServersIndex from './pages/servers/Index'
 import Settings from './pages/Settings'
 import './css/index.css'
 
@@ -24,7 +24,16 @@ const router = createBrowserRouter([
       },
       {
         path: "/servers",
-        element: <Servers />,
+        children: [
+          {
+            index: true,
+            element: <ServersIndex />,
+          },
+          {
+            path: "/create",
+            element: <CreateServer />
+          }
+        ]
       },
       {
         path: "/settings",
