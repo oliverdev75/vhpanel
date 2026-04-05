@@ -1,5 +1,5 @@
 import { Outlet, useLocation, useNavigate } from "react-router"
-import Navbar from "./Navbar"
+import Header from "./Header"
 import useAuth from "@/hooks/auth/useAuth"
 import { useEffect } from "react"
 
@@ -21,7 +21,7 @@ function Layout () {
     return (
         <>
             <div className="flex min-h-screen">
-                <Navbar />
+                <Header />
                 <main className="flex-1">
                     <Outlet />
                 </main>

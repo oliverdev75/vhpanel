@@ -4,10 +4,6 @@ interface VectorProps {
     children: ReactNode
 }
 
-interface LogoProps {
-    size?: string
-}
-
 const size = 30
 
 const Vector = ({ children }: VectorProps) => (

@@ -1,16 +1,18 @@
 import { useState } from "react"
 import Icon from "../Icon"
+import type { SelectOption } from "@/types"
 
 interface Props {
     value: string,
-    options: object[],
+    options: SelectOption[],
     id?: string,
     className?: string,
+    full?: boolean,
     onChange: (v: any) => void
 }
 
 
-function Select ({ value, options, className, onChange }: Props) {
+function Select ({ value, options, className, full = false, onChange }: Props) {
     const [isClosed, setIsClosed] = useState(true)
 
     const makeSelectOptions = () => (
@@ -40,9 +42,9 @@ function Select ({ value, options, className, onChange }: Props) {
 
     return (
         <>
-            <div className="absolute top0 left-0 size-screen z-10" onClick={() => setIsClosed(true)} />
-            <div className="w-fit relative">
-                <button onClick={handleSelectClick} className={`size-fit pl-3 pr-2 py-2 border border-neutral-300 rounded-lg flex items-center gap-2 hover:cursor-pointer ${className || ''}`}>
+            <div className="absolute top-0 left-0 size-screen z-10" onClick={() => setIsClosed(true)} />
+            <div className={`${full ? 'w-full' : 'w-fit'} relative`}>
+                <button type="button" onClick={handleSelectClick} className={`${full ? 'w-full' : 'w-fit'} h-fit pl-3 pr-2 py-2 border border-neutral-300 rounded-lg flex items-center ${full ? 'justify-between' : 'gap-2'} hover:cursor-pointer${className ? ` ${className}` : ''}`}>
                     <span className="flex items-center gap-2">{options.find(option => option.value === value)?.name || 'Value'}</span>
                     <Icon className="!text-2xl text-neutral-400">keyboard_arrow_down</Icon>
                 </button>

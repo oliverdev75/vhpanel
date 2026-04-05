@@ -14,7 +14,7 @@ class KVMService
      */
     public function __construct(string $server, string $conn_type, bool $readonly)
     {
-        $this->connection = libvirt_connect("qemu+$conn_type://$server", $readonly);
+        $this->connection = libvirt_connect("qemu+$conn_type://$server/system", false);
     }
 
     public function getServerByName(string $name)

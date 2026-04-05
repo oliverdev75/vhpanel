@@ -21,9 +21,9 @@ function Button ({ variant = 'primary', text = false, icon, iconPos, iconClass =
     const hasRightIcon = () => icon && iconPos === 'right' && <Icon className={iconClass}>{icon}</Icon>
 
     const styles = () => {
-        const base = `font-bold px-6 py-1.5 rounded-lg flex justify-center gap-2 ${!full && 'w-fit'} hover:cursor-pointer ${className}`
+        const base = `font-bold px-6 py-1.5 rounded-lg flex justify-center gap-2 ${!full && 'w-fit'} hover:cursor-pointer${className ? ` ${className}` : ''}`
         if (variant === 'primary') {
-            return `${base} text-white bg-site hover:bg-btn-hover active:bg-btn-active ${className}`
+            return `${base} text-white bg-site hover:bg-btn-primary-hover active:bg-btn-primary-active${className ? ` ${className}` : ''}`
         } else if (variant === 'danger') {
             return `${base} text-white bg-btn-danger hover:bg-btn-danger-hover active:bg-btn-danger-active`
         } else {

@@ -4,7 +4,7 @@ import Icon from "../Icon"
 interface Props {
     value: string,
     placeholder?: string,
-    onChange: (e: ChangeEvent) => void
+    onChange: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
 function Searchbox ({ value, placeholder, onChange }: Props) {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import Button from "../Button"
 import Modal from "./Modal"
 import useServers from "@/hooks/useServers"
@@ -16,7 +16,7 @@ function DeleteServerModal ({ visible, server, closeCallback }: Props) {
     const { destroy } = useServers()
 
     const handleDelete = () => {
-        destroy(server.id)
+        server && destroy(server.id)
         setIsAlert(true)
         closeCallback()
     }

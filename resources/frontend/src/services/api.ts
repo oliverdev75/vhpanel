@@ -39,7 +39,7 @@ export const put = async (endpoint: string, data: object, vars: object | null = 
 
 export const del = async (endpoint: string, vars: object | null = null) => {
     console.log(vars)
-    let response = {}
+    let response = { status: 0 }
     const parsedVars = vars ? parseUrlVars(vars) : ''
     api.delete(`${endpoint}?${parsedVars}`)
         .then(res => {

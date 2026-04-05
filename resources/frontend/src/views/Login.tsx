@@ -4,7 +4,7 @@ import Button from '@/components/Button'
 import InputPassword from '@/components/inputs/input_password/InputPassword'
 import Checkbox from '@/components/inputs/Checkbox'
 import { useEffect, useState } from 'react'
-import type { FormEvent, InputEvent } from 'react'
+import type { ChangeEvent, FormEvent } from 'react'
 import useAuthActions from '@/hooks/auth/useAuthActions'
 import useAuth from '@/hooks/auth/useAuth'
 import { useNavigate } from 'react-router'
@@ -27,16 +27,17 @@ function Login () {
         })
     }
 
-    const handleEmailChange = (e: InputEvent) => {
-        setEmail(e.target?.value)
+    const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
+        console.log(e)
+        setEmail(e.currentTarget.value)
     }
 
-    const handlePasswordChange = (e: InputEvent) => {
-        setPassword(e.target?.value)
+    const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setPassword(e.currentTarget.value)
     }
 
-    const handleRememberMeChange = (e: InputEvent) => {
-        setRememberMe(e.target?.checked)
+    const handleRememberMeChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setRememberMe(e.currentTarget.checked)
     }
 
     useEffect(() => {

@@ -1,4 +1,10 @@
 
+
+export interface SelectOption {
+    name: string,
+    value: string
+}
+
 export interface NavLinkProps {
     route: string,
     name: string,
@@ -11,18 +17,24 @@ export interface UserCredentials {
     remember_me: boolean
 }
 
-export interface User {
+interface Model {
     id: number,
+    created_at: string,
+    updated_at: string
+}
+
+export interface User extends Model {
     email: string,
     fullname: string,
     role: object,
     last_logon: string,
-    created_at: string,
-    updated_at: string,
 }
 
-export interface Server {
-    id: number,
+type ServerStatus = 0 | 1
+type OSType = 'linux' | 'windows'
+type OSFunction = 'os' | 'application'
+
+export interface Server extends Model {
     active_user_id: number,
     os_version_id: number,
     name: string,
@@ -32,10 +44,37 @@ export interface Server {
     mac?: string,
     ip: string,
     installed: boolean,
-    status: number,
-    created_at: string,
-    updated_at: string,
+    status: ServerStatus,
     active_user: User,
-    os_version: object,
-    disks: object[]
+    os_version: OSVersion,
+    disks: Disk[]
+}
+
+export interface Disk extends Model {
+    name: string,
+    pivot: ServerDiskPivot,
+    size: number
+}
+
+export interface ServerDiskPivot extends Model {
+    server_id: number,
+    disk_id: number,
+    main: boolean    
+}
+
+export interface OSVersion extends Model {
+    os_id: number,
+    os: OS,
+    version: string,
+    stable: boolean,
+    tls: boolean,
+    codename: string,
+}
+
+export interface OS extends Model {
+    active_user_id: number,
+    shortname: string,
+    name: string,
+    type: OSType,
+    function: OSFunction
 }

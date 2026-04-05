@@ -1,8 +1,11 @@
 import { formatBytes } from "bytes-formatter"
-import Icon from "./Icon"
-import Tag from "./Tag"
-import Button from "./Button"
+import Icon from "../../Icon"
+import Tag from "../../Tag"
+import Button from "../../Button"
 import type { Server } from "@/types"
+import ChangeStatusButton from "./ChangeStatusButton"
+import { get } from "@/services/api"
+import { useEffect } from "react"
 
 interface Props extends Server {
     handleEdit: (server: Server) => void
@@ -10,8 +13,13 @@ interface Props extends Server {
 }
 
 function RowServer ({ id, name, cores, memory, os_version, disks, status, installed, handleEdit, handleDelete }: Props) {
+    const mainDisk = disks.find(disk => disk.pivot.main) || { size: 1 }
 
-    const mainDisk = disks.find(disk => disk.pivot.main)
+    useEffect(() => console.log(installed), [])
+
+    const bootServer = () => {
+        get('/server/boot', { server: id })
+    }
 
     return (
         <tr className="bg-white backdrop-opacity-15">
@@ -19,7 +27,7 @@ function RowServer ({ id, name, cores, memory, os_version, disks, status, instal
                 <span>{name}</span>
             </td>
             <td className="flex items-center gap-3">
-                <Icon>{os_version.os.short_name}</Icon>
+                <Icon>{os_version.os.shortname}</Icon>
                 <span>{`${os_version.os.name} ${os_version.version}`}</span>
             </td>
             <td>
@@ -41,8 +49,11 @@ function RowServer ({ id, name, cores, memory, os_version, disks, status, instal
             </td>
             <td>
                 <Tag className="flex items-center gap-1 px-2 bg-gray-200 text-gray-600">
-                    {formatBytes(mainDisk?.size)}
+                    {formatBytes(mainDisk.size)}
                 </Tag>
+            </td>
+            <td>
+                <ChangeStatusButton status={status} onClick={bootServer} />
             </td>
             <td>
                 <div className="flex items-center">

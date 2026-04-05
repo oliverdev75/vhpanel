@@ -1,4 +1,4 @@
-import { useState, useRef, type ReactNode } from "react"
+import { type ReactNode } from "react"
 
 interface SkeletonProps {
     className: string,

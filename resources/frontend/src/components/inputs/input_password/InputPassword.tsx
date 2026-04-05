@@ -27,7 +27,7 @@ function InputPassword({
 
     return label ? (
         <div className={`flex items-center gap-3${className || ''}`}>
-            <label htmlFor={id}>{label}</label>
+            <label htmlFor={id}>{label}:</label>
             <Core
                 value={value}
                 name={name}

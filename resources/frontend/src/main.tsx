@@ -6,6 +6,7 @@ import AuthProvider from './contexts/AuthContext'
 import Login from './views/Login'
 import Layout from './layout/Layout'
 import ServersIndex from './pages/servers/Index'
+import CreateServer from './pages/servers/Create'
 import Settings from './pages/Settings'
 import './css/index.css'
 
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
             element: <ServersIndex />,
           },
           {
-            path: "/create",
+            path: "create",
             element: <CreateServer />
           }
         ]

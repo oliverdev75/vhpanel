@@ -1,5 +1,4 @@
 import Icon from "@/components/Icon"
-import { useEffect } from "react"
 import { NavLink, useLocation } from "react-router"
 
 interface Props {

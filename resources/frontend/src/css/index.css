@@ -15,6 +15,7 @@
 
     --color-subtitle: #999;
     --color-modal: rgba(133, 133, 133, 0.5);
+    --color-os-selector-active: #F2F8FF;
 }
 
 html {
