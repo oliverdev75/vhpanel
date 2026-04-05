@@ -31,8 +31,8 @@ export interface User extends Model {
 }
 
 type ServerStatus = 0 | 1
-type OSType = 'linux' | 'windows'
-type OSFunction = 'os' | 'application'
+type OSSystem = 'linux' | 'windows'
+type OSType = 'os' | 'application'
 
 export interface Server extends Model {
     active_user_id: number,
@@ -75,6 +75,6 @@ export interface OS extends Model {
     active_user_id: number,
     shortname: string,
     name: string,
-    type: OSType,
-    function: OSFunction
+    system: OSSystem,
+    type: OSType
 }

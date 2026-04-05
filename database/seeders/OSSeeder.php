@@ -18,36 +18,36 @@ class OSSeeder extends Seeder
                 "id" => 1,
                 "name" => "Debian",
                 "short_name" => "debian",
-                "type" => "os",
-                "os_type" => "linux"
+                "system" => "linux",
+                "type" => "os"
             ],
             [
                 "id" => 2,
                 "name" => "Ubuntu",
                 "short_name" => "ubuntu",
-                "type" => "os",
-                "os_type" => "linux"
+                "system" => "linux",
+                "type" => "os"
             ],
             [
                 "id" => 3,
                 "name" => "Rocky",
                 "short_name" => "rocky",
-                "type" => "os",
-                "os_type" => "linux"
+                "system" => "linux",
+                "type" => "os"
             ],
             [
                 "id" => 4,
                 "name" => "CentOS",
                 "short_name" => "centos",
-                "type" => "os",
-                "os_type" => "linux"
+                "system" => "linux",
+                "type" => "os"
             ],
             [
                 "id" => 5,
                 "name" => "Alma Linux",
                 "short_name" => "alma",
-                "type" => "os",
-                "os_type" => "linux"
+                "system" => "linux",
+                "type" => "os"
             ]
         ];
 

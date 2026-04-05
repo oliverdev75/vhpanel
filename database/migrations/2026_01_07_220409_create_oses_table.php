@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('oses', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('active_user_id')->nullable();
-            $table->string("short_name")->unique();
+            $table->string("shortname")->unique();
             $table->string("name");
+            $table->string("system");
             $table->string("type");
-            $table->string("os_type");
             $table->timestamps();
 
             $table->foreign('active_user_id')->references('id')->on('active_users');
