@@ -26,7 +26,7 @@ function Icon ({ className, children }: Props) {
             return <OS.Rocky />
     }
 
-    return <i className={`material-symbols-rounded ${className || ''}`}>{children}</i>
+    return <i className={`material-symbols-rounded${className ? ` ${className}` : ''}`}>{children}</i>
 }
 
 export default Icon

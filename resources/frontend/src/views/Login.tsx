@@ -28,7 +28,6 @@ function Login () {
     }
 
     const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
-        console.log(e)
         setEmail(e.currentTarget.value)
     }
 

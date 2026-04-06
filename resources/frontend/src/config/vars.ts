@@ -1,2 +1,2 @@
 
-export const API_URL = 'https://api.vhpanel.bernat26.es/api'
+export const API_URL = 'http://localhost:8000/api'

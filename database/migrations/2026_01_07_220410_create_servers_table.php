@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('mac', 17)->unique()->nullable();
             $table->string('ip', 18);
             $table->boolean('installed')->default(true);
+            $table->string('kvm_id')->nullable();
             $table->integer('status')->default(0);
             $table->timestamps();
             $table->foreign('active_user_id')->references('id')->on('active_users');

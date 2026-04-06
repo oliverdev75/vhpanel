@@ -5,20 +5,45 @@ import Button from "../../Button"
 import type { Server } from "@/types"
 import ChangeStatusButton from "./ChangeStatusButton"
 import { get } from "@/services/api"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 interface Props extends Server {
+    updateList: () => void,
     handleEdit: (server: Server) => void
     handleDelete: (server: Server) => void
 }
 
-function RowServer ({ id, name, cores, memory, os_version, disks, status, installed, handleEdit, handleDelete }: Props) {
+function RowServer ({ id, kvm_id, name, cores, memory, os_version, disks, status, installed, updateList, handleEdit, handleDelete }: Props) {
+    const [bootStatus, setBootStatus] = useState<0 | 1 | 2>(status)
     const mainDisk = disks.find(disk => disk.pivot.main) || { size: 1 }
+
+    const getChangeStatusCallback = () => {
+        switch (bootStatus) {
+            case 0:
+                return bootServer
+            case 1:
+                return shutdownServer
+        }
+    }
 
     useEffect(() => console.log(installed), [])
 
     const bootServer = () => {
-        get('/server/boot', { server: id })
+        setBootStatus(2)
+        get(`/server/boot/${id}`)
+        .then(res => {
+            updateList()
+            console.log(res.data)
+        })
+    }
+
+    const shutdownServer = () => {
+        setBootStatus(2)
+        get(`/server/shutdown/${id}`)
+        .then(res => {
+            updateList()
+            console.log(res.data)
+        })
     }
 
     return (
@@ -53,12 +78,24 @@ function RowServer ({ id, name, cores, memory, os_version, disks, status, instal
                 </Tag>
             </td>
             <td>
-                <ChangeStatusButton status={status} onClick={bootServer} />
+                <ChangeStatusButton status={bootStatus} onClick={getChangeStatusCallback} />
             </td>
             <td>
                 <div className="flex items-center">
-                    <Button icon="edit" iconClass="text-gray-500" text onClick={handleEdit} />
-                    <Button icon="delete" iconClass="text-gray-500" text onClick={handleDelete} />
+                    <Button
+                        disabled={bootStatus === 0}
+                        icon="edit"
+                        iconClass={bootStatus === 0 ? 'text-gray-500' : 'text-gray-300'}
+                        text
+                        onClick={bootStatus === 0 ? handleEdit : () => {}}
+                    />
+                    <Button
+                        disabled={bootStatus === 0}
+                        icon="delete"
+                        iconClass={bootStatus === 0 ? 'text-gray-500' : 'text-gray-300'}
+                        text
+                        onClick={bootStatus === 0 ? handleDelete : () => {}}
+                    />
                 </div>
             </td>
         </tr>

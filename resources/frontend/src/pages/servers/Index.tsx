@@ -37,6 +37,7 @@ function Servers () {
                             <RowServer
                                 key={server.id}
                                 {...server}
+                                updateList={getServers}
                                 handleEdit={() => handleEditServer(server)}
                                 handleDelete={() => handleDeleteServer(server)}
                             />
@@ -47,6 +48,12 @@ function Servers () {
         }
         
         return <span>Loading...</span>
+    }
+
+    const getServers = () => {
+        get('/user/servers').then(res => {
+            setServersList(res.data.data)
+        })
     }
 
     const handleEditServer = (server: Server) => {
@@ -60,9 +67,7 @@ function Servers () {
     }
 
     useEffect(() => {
-        get('/user/servers').then(res => {
-            setServersList(res.data.data)
-        })
+        getServers()
     }, [])
 
     useEffect(() => {

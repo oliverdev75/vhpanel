@@ -10,12 +10,13 @@ interface Props {
     icon?: string,
     iconPos?: 'left' | 'right',
     iconClass?: string,
+    disabled?: boolean,
     children?: ReactNode,
     onClick?: EventHandler<any>,
     onDoubleClick?: EventHandler<any>,
 }
 
-function Button ({ variant = 'primary', text = false, icon, iconPos, iconClass = '', type, className, full = false, onClick, onDoubleClick, children }: Props) {
+function Button ({ variant = 'primary', text = false, icon, iconPos, iconClass = '', disabled = false, type, className, full = false, onClick, onDoubleClick, children }: Props) {
 
     const hasLeftIcon = () => icon && (!iconPos || iconPos === 'left') && <Icon className={iconClass}>{icon}</Icon>
     const hasRightIcon = () => icon && iconPos === 'right' && <Icon className={iconClass}>{icon}</Icon>
@@ -26,14 +27,20 @@ function Button ({ variant = 'primary', text = false, icon, iconPos, iconClass =
             return `${base} text-white bg-site hover:bg-btn-primary-hover active:bg-btn-primary-active${className ? ` ${className}` : ''}`
         } else if (variant === 'danger') {
             return `${base} text-white bg-btn-danger hover:bg-btn-danger-hover active:bg-btn-danger-active`
-        } else {
-            return `${base} text-white bg-btn-secondary hover:bg-btn-secondary-hover active:bg-btn-secondary-active`
         }
+
+        return `${base} text-white bg-btn-secondary hover:bg-btn-secondary-hover active:bg-btn-secondary-active`
     }
 
     if (text) {
         return (
-            <button type={type || undefined} onClick={onClick} onDoubleClick={onDoubleClick} className={`h-fit flex justify-center items-center hover:cursor-pointer${icon ? ' p-2 rounded-full hover:bg-gray-100' : ''}${className ? ` ${className}` : ''}`}>
+            <button
+                type={type || undefined}
+                onClick={onClick}
+                onDoubleClick={onDoubleClick}
+                className={`h-fit flex justify-center items-center ${disabled ? 'hover:cursor-pointer' : 'hover:cursor-not-allowed'} ${icon ? ' p-2 rounded-full hover:bg-gray-100' : ''}${className ? ` ${className}` : ''}`}
+                disabled={disabled}
+            >
                 {hasLeftIcon()}
                 {children && <span className="inline-flex items-center">{children}</span>}
                 {hasRightIcon()}
@@ -47,6 +54,7 @@ function Button ({ variant = 'primary', text = false, icon, iconPos, iconClass =
             onClick={onClick}
             onDoubleClick={onDoubleClick}
             className={styles()}
+            disabled={disabled}
         >
             {hasLeftIcon()}
             <span>{children || ''}</span>

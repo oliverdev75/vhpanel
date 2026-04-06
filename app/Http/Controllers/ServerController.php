@@ -53,8 +53,21 @@ class ServerController extends Controller
         //
     }
 
-    public function boot(Server $id)
+    public function boot(Server $server)
     {
-        $this->kvm->bootServer($id);
+        $this->kvm->bootServer($server->kvm_id);
+        $server->status = 1;
+        $server->save();
+
+        return response()->json(['message' => "Server {$server->id} booted successfuly"]);
+    }
+
+    public function shutdown(Server $server)
+    {
+        $this->kvm->shutdownServer($server->kvm_id);
+        $server->status = 0;
+        $server->save();
+
+        return response()->json(['message' => "Server {$server->id} shotdown successfuly"]);
     }
 }

@@ -13,7 +13,7 @@ class ServerSeeder extends Seeder
             [
                 'short' => 'ubuntu', 
                 'full' => 'Ubuntu Linux', 
-                'type' => 'linux', 
+                'system' => 'linux', 
                 'versions' => [
                     ['v' => '24.04', 'code' => 'noble_numbat', 'lts' => 1],
                     ['v' => '22.04', 'code' => 'jammy_jellyfish', 'lts' => 1]
@@ -22,7 +22,7 @@ class ServerSeeder extends Seeder
             [
                 'short' => 'debian', 
                 'full' => 'Debian GNU/Linux', 
-                'type' => 'linux', 
+                'system' => 'linux', 
                 'versions' => [
                     ['v' => '12.0', 'code' => 'bookworm', 'lts' => 1],
                     ['v' => '11.0', 'code' => 'bullseye', 'lts' => 1]
@@ -31,7 +31,7 @@ class ServerSeeder extends Seeder
             [
                 'short' => 'centos', 
                 'full' => 'CentOS Stream', 
-                'type' => 'linux', 
+                'system' => 'linux', 
                 'versions' => [
                     ['v' => '9.0', 'code' => 'stream_9', 'lts' => 0]
                 ]
@@ -39,7 +39,7 @@ class ServerSeeder extends Seeder
             [
                 'short' => 'rhel', 
                 'full' => 'Red Hat Enterprise Linux', 
-                'type' => 'linux', 
+                'system' => 'linux', 
                 'versions' => [
                     ['v' => '9.4', 'code' => 'plow', 'lts' => 1],
                     ['v' => '8.10', 'code' => 'ootpa', 'lts' => 1]
@@ -48,7 +48,7 @@ class ServerSeeder extends Seeder
             [
                 'short' => 'rocky', 
                 'full' => 'Rocky Linux', 
-                'type' => 'linux', 
+                'system' => 'linux', 
                 'versions' => [
                     ['v' => '9.3', 'code' => 'blue_onyx', 'lts' => 1]
                 ]
@@ -56,7 +56,7 @@ class ServerSeeder extends Seeder
             [
                 'short' => 'alma', 
                 'full' => 'AlmaLinux', 
-                'type' => 'linux', 
+                'system' => 'linux', 
                 'versions' => [
                     ['v' => '9.3', 'code' => 'emerald_elixir', 'lts' => 1]
                 ]
@@ -64,7 +64,7 @@ class ServerSeeder extends Seeder
             [
                 'short' => 'suse', 
                 'full' => 'SUSE Linux Enterprise', 
-                'type' => 'linux', 
+                'system' => 'linux', 
                 'versions' => [
                     ['v' => '15.5', 'code' => 'sles_15_sp5', 'lts' => 1]
                 ]
@@ -74,10 +74,10 @@ class ServerSeeder extends Seeder
         foreach ($data as $osItem) {
             $osId = DB::table('oses')->insertGetId([
                 'active_user_id' => null,
-                'short_name'     => $osItem['short'],
+                'shortname'     => $osItem['short'],
                 'name'           => $osItem['full'],
-                'type'           => $osItem['type'],
-                'os_type'        => 'server',
+                'system'         => $osItem['system'],
+                'type'           => 'os',
                 'created_at'     => now(),
                 'updated_at'     => now(),
             ]);
@@ -111,7 +111,6 @@ class ServerSeeder extends Seeder
                 $diskId = DB::table('disks')->insertGetId([
                     'name'       => 'System_Root_Drive',
                     'size'    => 42949672960, // 40 GB in bytes
-                    'installed'  => false,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);

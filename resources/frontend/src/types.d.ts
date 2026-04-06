@@ -35,6 +35,7 @@ type OSSystem = 'linux' | 'windows'
 type OSType = 'os' | 'application'
 
 export interface Server extends Model {
+    kvm_id: string,
     active_user_id: number,
     os_version_id: number,
     name: string,

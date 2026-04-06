@@ -19,7 +19,7 @@ class KVMService
 
     public function getServerByName(string $name)
     {
-        return libvirt_domain_lookup_by_name($this->connection, $name);
+        return libvirt_domain_lookup_by_uuid_string($this->connection, $name);
     }
 
     public function bootServer(string $id)
@@ -29,11 +29,11 @@ class KVMService
 
     public function shutdownServer(string $name)
     {
-        return libvirt_domain_shutdown($name);
+        return libvirt_domain_shutdown($this->getServerByName($id));
     }
 
-    public function createServer(string $name, int $memory, int $maxMemory, int $vcpus, string $iso, array $disks, array $networks)
+    public function createServer(string $name, int $memory, int $vcpus, string $iso, array $disks, array $networks)
     {
-        return libvirt_domain_new($this->connection, $name, null, $memory, $maxMemory, $vcpus, $iso, $disks, $networks);
+        return libvirt_domain_new($this->connection, $name, null, $memory, $memory, $vcpus, $iso, $disks, $networks);
     }
 }
