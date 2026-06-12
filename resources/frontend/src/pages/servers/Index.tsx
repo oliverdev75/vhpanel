@@ -1,7 +1,7 @@
 import { useEffect, useState, type ChangeEvent } from "react"
 import Page from "../Page"
 import Searchbox from "@/components/inputs/Searchbox"
-import Select from "@/components/inputs/Select"
+// import Select from "@/components/inputs/Select"
 import DataTable from "@/components/tables/DataTable"
 import RowServer from "@/components/servers/index/RowServer"
 import DeleteServerModal from "@/components/modals/DeleteServerModal"
@@ -10,14 +10,16 @@ import type { Server } from "@/types"
 import Link from "@/components/Link"
 import Button from "@/components/Button"
 import '@/css/servers.css'
+import EditServerModal from "@/components/modals/EditServerModal";
 
 function Servers () {
     const [search, setSearch] = useState('')
-    const [option, setOption] = useState('debian')
+    // const [option, setOption] = useState('debian')
     const [serversList, setServersList] = useState<Server[]>([])
-    //const [editServerModalVisible, setEditServerModalVisible] = useState(false)
-    const [deleteServerModalVisible, setDeleteServerModalVisible] = useState(false)
+    const [editServerModalVisible, setEditServerModalVisible] = useState(false)
     const [focusedServerData, setFocusedServerData] = useState<Server>()
+    let tmpServerData
+    const [deleteServerModalVisible, setDeleteServerModalVisible] = useState(false)
     
     const colsList = [
         'Name',
@@ -58,12 +60,20 @@ function Servers () {
 
     const handleEditServer = (server: Server) => {
         setFocusedServerData(server)
-        //setEditServerModalVisible(true)
+        setEditServerModalVisible(true)
     }
 
     const handleDeleteServer = (server: Server) => {
         setFocusedServerData(server)
         setDeleteServerModalVisible(true)
+    }
+
+    const setServer = (prop: keyof Server, value: string) => {
+        tmpServerData = {...focusedServerData}
+        if (tmpServerData) {
+            tmpServerData[prop] = value
+        }
+        setFocusedServerData(tmpServerData as Server)
     }
 
     useEffect(() => {
@@ -83,11 +93,22 @@ function Servers () {
                     </Link>
                 </div>
                 <div className="flex gap-2 items-start">
-                    <Searchbox value={search} onChange={(e: ChangeEvent<HTMLInputElement>) => setSearch(e.currentTarget.value)} placeholder="Search..." />
-                    <Select value={option} options={[]} onChange={(value) => setOption(value)} />
+                    <Searchbox
+                        value={search}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) => setSearch(e.currentTarget.value)}
+                        placeholder="Search..."
+                        full
+                    />
+                    {/* <Select value={option} options={[]} onChange={(value) => setOption(value)} /> */}
                 </div>
                 <List />
             </Page>
+            <EditServerModal
+                server={focusedServerData}
+                visible={editServerModalVisible}
+                setServer={setServer}
+                closeCallback={() => setEditServerModalVisible(false)}
+            />
             <DeleteServerModal
                 visible={deleteServerModalVisible}
                 server={focusedServerData}

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('disks', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->double('size');
+            $table->string('size');
             $table->timestamps();
         });
     }

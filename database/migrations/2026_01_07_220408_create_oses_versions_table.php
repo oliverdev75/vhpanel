@@ -18,6 +18,7 @@ return new class extends Migration
             $table->boolean('stable')->default(1);
             $table->boolean('lts')->default(0);
             $table->string('codename');
+            $table->string('iso')->nullable();
             $table->timestamps();
         });
     }

@@ -18,14 +18,12 @@ function Alert ({ severity, icon, children}: Props) {
             case 'danger':
                 return 'error'
         }
-
-        return null
     }
 
     return (
         <>
             <div className="px-4 py-3 bg-red-100 text-red-500 rounded-lg flex items-center gap-4">
-                <Icon>{showIcon() || icon}</Icon>
+                <Icon>{icon || showIcon()}</Icon>
                 <p>{children}</p>
             </div>
         </>

@@ -9,10 +9,15 @@ const useAuthActions = () => {
     const { setUser } = useAuth()
     const navigate = useNavigate()
 
-    const login = async (credentials: UserCredentials) => {
-        const { data } = await post('/login', credentials)
-        console.log(data)
-        localStorage.setItem('token', data.token)
+    const login = async (credentials: UserCredentials, errorCallback: () => void) => {
+        let res
+        try {
+            res = await post('/login', credentials)
+        } catch {
+            errorCallback()
+        }
+        console.log(res?.data)
+        localStorage.setItem('token', res?.data.token)
 
         const user = await get('/auth/me')
         console.log(user)

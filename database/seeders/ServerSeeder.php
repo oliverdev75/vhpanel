@@ -101,6 +101,7 @@ class ServerSeeder extends Seeder
                     'cores'          => 4,
                     'memory'         => 8.0,
                     'mac'            => sprintf('00:16:3e:%02x:%02x:%02x', mt_rand(0, 255), mt_rand(0, 255), mt_rand(0, 255)),
+                    'username'       => "test",
                     'ip'             => '10.0.' . mt_rand(1, 250) . '.' . mt_rand(1, 250),
                     'installed'      => false,
                     'status'         => 0,

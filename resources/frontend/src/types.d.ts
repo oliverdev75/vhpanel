@@ -30,7 +30,8 @@ export interface User extends Model {
     last_logon: string,
 }
 
-type ServerStatus = 0 | 1
+type ServerStatus = 0 | 1 // 0 = Off, 1 = Active
+type PivotServerStatus = 2 | 3
 type OSSystem = 'linux' | 'windows'
 type OSType = 'os' | 'application'
 

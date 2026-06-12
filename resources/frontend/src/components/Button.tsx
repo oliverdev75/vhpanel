@@ -21,15 +21,11 @@ function Button ({ variant = 'primary', text = false, icon, iconPos, iconClass =
     const hasLeftIcon = () => icon && (!iconPos || iconPos === 'left') && <Icon className={iconClass}>{icon}</Icon>
     const hasRightIcon = () => icon && iconPos === 'right' && <Icon className={iconClass}>{icon}</Icon>
 
-    const styles = () => {
-        const base = `font-bold px-6 py-1.5 rounded-lg flex justify-center gap-2 ${!full && 'w-fit'} hover:cursor-pointer${className ? ` ${className}` : ''}`
-        if (variant === 'primary') {
-            return `${base} text-white bg-site hover:bg-btn-primary-hover active:bg-btn-primary-active${className ? ` ${className}` : ''}`
-        } else if (variant === 'danger') {
-            return `${base} text-white bg-btn-danger hover:bg-btn-danger-hover active:bg-btn-danger-active`
-        }
-
-        return `${base} text-white bg-btn-secondary hover:bg-btn-secondary-hover active:bg-btn-secondary-active`
+    const classBase = `font-bold px-6 py-1.5 rounded-lg flex justify-center gap-2 ${!full && 'w-fit'} hover:cursor-pointer ${className ? ` ${className}` : ''}`
+    const styles = {
+        primary: `${classBase} text-white bg-site hover:bg-btn-primary-hover active:bg-btn-primary-active ${className ? ` ${className}` : ''}`,
+        secondary: `${classBase} text-white bg-btn-secondary hover:bg-btn-secondary-hover active:bg-btn-secondary-active`,
+        danger: `${classBase} text-white bg-btn-danger hover:bg-btn-danger-hover active:bg-btn-danger-active`
     }
 
     if (text) {
@@ -38,7 +34,7 @@ function Button ({ variant = 'primary', text = false, icon, iconPos, iconClass =
                 type={type || undefined}
                 onClick={onClick}
                 onDoubleClick={onDoubleClick}
-                className={`h-fit flex justify-center items-center ${disabled ? 'hover:cursor-pointer' : 'hover:cursor-not-allowed'} ${icon ? ' p-2 rounded-full hover:bg-gray-100' : ''}${className ? ` ${className}` : ''}`}
+                className={`h-fit flex justify-center items-center ${disabled ? 'hover:cursor-not-allowed' : 'hover:cursor-pointer' }${icon ? ' p-2 rounded-full hover:bg-gray-100' : ''}${className ? ` ${className}` : ''}`}
                 disabled={disabled}
             >
                 {hasLeftIcon()}
@@ -53,7 +49,7 @@ function Button ({ variant = 'primary', text = false, icon, iconPos, iconClass =
             type={type || undefined}
             onClick={onClick}
             onDoubleClick={onDoubleClick}
-            className={styles()}
+            className={styles[variant]}
             disabled={disabled}
         >
             {hasLeftIcon()}

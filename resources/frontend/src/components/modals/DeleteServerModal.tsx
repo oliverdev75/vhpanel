@@ -49,7 +49,7 @@ function DeleteServerModal ({ visible, server, closeCallback }: Props) {
         <>
             <Modal
                 visible={visible}
-                closeCallback={closeCallback}
+                closeCallback={handleCancel}
                 title={title()}
             >
                 <Advice />

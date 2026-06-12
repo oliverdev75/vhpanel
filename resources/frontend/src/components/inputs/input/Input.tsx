@@ -10,17 +10,18 @@ interface Props {
     tabIndex?: number,
     placeholder?: string,
     label?: ReactNode,
-    onChange?: EventHandler<any>
+    className?: string,
+    onChange: (value: any) => void
 }
 
-function Input ({ value, name, type = "string", placeholder, label, id, tabIndex, full = false, onChange }: Props) {
+function Input ({ value, name, type = "string", placeholder, label, id, tabIndex, full = false, onChange, className }: Props) {
     return label ? (
-        <div className={`flex items-center gap-3${full && ' w-full'}`}>
+        <div className={`flex items-center gap-3${full ? ' w-full' : ''}`}>
             <label htmlFor={id}>{label}:</label>
             <Core
                 type={type}
                 tabIndex={tabIndex}
-                className={full ? 'w-full' : ''}
+                className={`${className || ''}${full ? ' w-full' : ''}`}
                 value={value}
                 id={id}
                 name={name}
@@ -32,7 +33,7 @@ function Input ({ value, name, type = "string", placeholder, label, id, tabIndex
         <Core
             type={type}
             tabIndex={tabIndex}
-            className={full ? 'w-full' : ''}
+            className={`${className || ''}${full ? ' w-full' : ''}`}
             value={value}
             id={id}
             name={name}

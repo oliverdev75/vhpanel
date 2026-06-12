@@ -113,6 +113,15 @@ return [
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
 
+        'netconfig' => [
+            'driver' => 'mysql',
+            'host' => env('NETCONFIG_DB_HOST'),
+            'port' => env('NETCONFIG_DB_PORT', '3306'),
+            'database' => env('NETCONFIG_DB_DATABASE', 'laravel'),
+            'username' => env('NETCONFIG_DB_USERNAME', 'root'),
+            'password' => env('NETCONFIG_DB_PASSWORD', ''),
+        ]
+
     ],
 
     /*

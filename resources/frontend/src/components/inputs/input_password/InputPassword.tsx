@@ -10,7 +10,7 @@ interface Props {
     placeholder?: string,
     id?: string,
     className?: string,
-    onChange?: EventHandler<any>,
+    onChange: (value: any) => void,
 }
 
 function InputPassword({
@@ -26,7 +26,7 @@ function InputPassword({
 }: Props) {
 
     return label ? (
-        <div className={`flex items-center gap-3${className || ''}`}>
+        <div className={`flex items-center gap-3`}>
             <label htmlFor={id}>{label}:</label>
             <Core
                 value={value}
@@ -36,6 +36,7 @@ function InputPassword({
                 {...(placeholder && { placeholder: placeholder })}
                 onChange={onChange}
                 visibility={visibility}
+                className={className}
             />
         </div>
     ) : (

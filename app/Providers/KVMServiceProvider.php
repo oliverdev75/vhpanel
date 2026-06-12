@@ -14,7 +14,7 @@ class KVMServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton(KVMService::class, function (Application $app) {
-            return new KVMService(env('KVM_HOST'), env('KVM_CONNECTION_TYPE'), env('KVM_READONLY', false));
+            return new KVMService(env('DMZ_HOST'), env('KVM_CONNECTION_TYPE'), env('KVM_READONLY', false));
         });
     }
 

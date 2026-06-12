@@ -22,6 +22,7 @@ return new class extends Migration
             $table->double('memory');
             $table->string('mac', 17)->unique()->nullable();
             $table->string('ip', 18);
+            $table->string('username');
             $table->boolean('installed')->default(true);
             $table->string('kvm_id')->nullable();
             $table->integer('status')->default(0);

@@ -1,4 +1,4 @@
-import type { EventHandler } from "react"
+import type { ChangeEvent, EventHandler } from "react"
 
 interface Props {
     value: any,
@@ -8,10 +8,15 @@ interface Props {
     className?: string,
     tabIndex?: number,
     placeholder?: string,
-    onChange?: EventHandler<any>
+    onChange: (value: any) => void
 }
 
-function Core ({ value, name, type = "string", placeholder, id, className = '', tabIndex, onChange }: Props) {
+function Core ({ value, name, type = "text", placeholder, id, className = '', tabIndex, onChange }: Props) {
+    
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        onChange(e.currentTarget.value)
+    }
+    
     return (
         <input
             type={type}
@@ -20,8 +25,8 @@ function Core ({ value, name, type = "string", placeholder, id, className = '', 
             id={id}
             name={name}
             {...(placeholder && { placeholder })}
-            className={`px-3 py-1 rounded-lg border border-gray-300 focus:outline-[#0394e2]${className ? ` ${className}` : ''}`}
-            onChange={onChange}
+            className={`px-3 py-1 rounded-lg border border-gray-300 focus:outline-input-focus-outline ${className ? ` ${className}` : ''}`}
+            onChange={handleChange}
         />
     )
 }

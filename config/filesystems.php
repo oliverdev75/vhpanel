@@ -60,6 +60,22 @@ return [
             'report' => false,
         ],
 
+        'land' => [
+            'driver' => 'sftp',
+            'host' => env('SFTP_HOST'),
+            'username' => env('SFTP_USERNAME'),
+            'password' => env('SFTP_PASSWORD'),
+            'port' => (int) env('SFTP_PORT', 22),
+            'ssl' => true,
+            'passive' => false,
+        ],
+
+        'templates' => [
+            'driver' => 'local',
+            'root' => resource_path('templates'),
+            'throw' => false
+        ]
+
     ],
 
     /*

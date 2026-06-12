@@ -2,8 +2,8 @@ import { formatBytes } from "bytes-formatter"
 import Icon from "../../Icon"
 import Tag from "../../Tag"
 import Button from "../../Button"
-import type { Server } from "@/types"
-import ChangeStatusButton from "./ChangeStatusButton"
+import type { PivotServerStatus, Server, ServerStatus } from "@/types"
+import PowerButton from "./PowerButton"
 import { get } from "@/services/api"
 import { useEffect, useState } from "react"
 
@@ -13,8 +13,8 @@ interface Props extends Server {
     handleDelete: (server: Server) => void
 }
 
-function RowServer ({ id, kvm_id, name, cores, memory, os_version, disks, status, installed, updateList, handleEdit, handleDelete }: Props) {
-    const [bootStatus, setBootStatus] = useState<0 | 1 | 2>(status)
+function RowServer ({ id, name, cores, memory, os_version, disks, status, installed, updateList, handleEdit, handleDelete }: Props) {
+    const [bootStatus, setBootStatus] = useState<ServerStatus | PivotServerStatus>(status)
     const mainDisk = disks.find(disk => disk.pivot.main) || { size: 1 }
 
     const getChangeStatusCallback = () => {
@@ -29,6 +29,7 @@ function RowServer ({ id, kvm_id, name, cores, memory, os_version, disks, status
     useEffect(() => console.log(installed), [])
 
     const bootServer = () => {
+        console.log('Booting', id)
         setBootStatus(2)
         get(`/server/boot/${id}`)
         .then(res => {
@@ -56,18 +57,19 @@ function RowServer ({ id, kvm_id, name, cores, memory, os_version, disks, status
                 <span>{`${os_version.os.name} ${os_version.version}`}</span>
             </td>
             <td>
-                <Tag className="flex items-center gap-1 pr-2 bg-sky-100 text-sky-500">
+                <Tag className="flex items-center gap-1 px-2 bg-sky-100 text-sky-500">
                     <Icon>memory</Icon>
                     <span>{cores}</span>
                 </Tag>
             </td>
             <td>
                 <Tag className="flex items-center gap-1 px-2 bg-red-200 text-red-600">
+                    <Icon>memory_alt</Icon>
                     <span>{memory} GB</span>
                 </Tag>
             </td>
             <td>
-                <Tag className="flex items-center gap-1 pr-2 bg-gray-200 text-gray-600">
+                <Tag className="flex items-center gap-1 px-2 bg-gray-200 text-gray-600">
                     <Icon>hard_disk</Icon>
                     <span>{disks.length}</span>
                 </Tag>
@@ -78,19 +80,19 @@ function RowServer ({ id, kvm_id, name, cores, memory, os_version, disks, status
                 </Tag>
             </td>
             <td>
-                <ChangeStatusButton status={bootStatus} onClick={getChangeStatusCallback} />
+                <PowerButton status={bootStatus} onClick={getChangeStatusCallback()} />
             </td>
             <td>
                 <div className="flex items-center">
                     <Button
-                        disabled={bootStatus === 0}
+                        disabled={bootStatus !== 0}
                         icon="edit"
                         iconClass={bootStatus === 0 ? 'text-gray-500' : 'text-gray-300'}
                         text
                         onClick={bootStatus === 0 ? handleEdit : () => {}}
                     />
                     <Button
-                        disabled={bootStatus === 0}
+                        disabled={bootStatus !== 0}
                         icon="delete"
                         iconClass={bootStatus === 0 ? 'text-gray-500' : 'text-gray-300'}
                         text

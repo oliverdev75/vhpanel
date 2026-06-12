@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OSVersion;
 use Illuminate\Http\Request;
 
 class OSController extends Controller
@@ -44,5 +45,10 @@ class OSController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function versionIndex()
+    {
+        return OSVersion::with('os')->get();
     }
 }

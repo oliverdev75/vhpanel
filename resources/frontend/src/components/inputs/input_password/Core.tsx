@@ -1,6 +1,6 @@
 import Button from "@/components/Button"
 import Icon from "@/components/Icon"
-import { useState, type EventHandler } from "react"
+import { useState, type ChangeEvent } from "react"
 
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
     placeholder?: string,
     id?: string,
     className?: string,
-    onChange?: EventHandler<any>,
+    onChange: (value: any) => void,
 }
 
 function Core ({ value, name, visibility = false, placeholder, tabIndex, id, className = '', onChange }: Props) {
@@ -25,6 +25,10 @@ function Core ({ value, name, visibility = false, placeholder, tabIndex, id, cla
 
     const handleBlur = () => {
         setStyle({})
+    }
+
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        onChange(e.currentTarget.value)
     }
 
     const handleEyeClick = () => {
@@ -48,12 +52,12 @@ function Core ({ value, name, visibility = false, placeholder, tabIndex, id, cla
                 {...(placeholder && { placeholder: placeholder })}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
-                onChange={onChange}
+                onChange={handleChange}
                 className="focus:outline-none"
             />
             {
                 visibility && (
-                    <Button onClick={handleEyeClick} text>
+                    <Button type="button" onClick={handleEyeClick} text>
                         <Icon className="!text-[1.2rem] text-[#969696]">{visibilityIcon}</Icon>
                     </Button>
                 )

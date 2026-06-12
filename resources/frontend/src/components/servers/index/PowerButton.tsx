@@ -1,12 +1,12 @@
 import Icon from "@/components/Icon"
-import type { ServerStatus } from "@/types"
+import type { PivotServerStatus, ServerStatus } from "@/types"
 
 interface Props {
-    status: 0 | 1 | 2,
+    status: ServerStatus | PivotServerStatus,
     onClick?: () => void
 }
 
-function ChangeStatusButton ({ status, onClick }: Props) {
+function PowerButton ({ status, onClick }: Props) {
 
     const showIcon = () => {
         switch (status) {
@@ -36,17 +36,19 @@ function ChangeStatusButton ({ status, onClick }: Props) {
                 return 'Start'
             case 1:
                 return 'Stop'
+            case 2:
+                return 'Starting...'
         }
         
-        return 'Starting...'
+        return 'Stopping...'
     }
 
     return (
-        <button disabled={status === 2} onClick={onClick} className={`px-3 py-1 flex items-center gap-2 rounded-lg ${getStyles()} text-white ${status === 2 ? 'hover:cursor-not-allowed' : 'hover:cursor-pointer'}`}>
+        <button disabled={status === 2 || status === 3} onClick={onClick} className={`px-3 py-1 flex items-center gap-2 rounded-lg ${getStyles()} text-white ${status === 2 ? 'hover:cursor-not-allowed' : 'hover:cursor-pointer'}`}>
             <Icon className={status === 2 ? 'animate-spin' : ''}>{showIcon()}</Icon>
             <span className="text-lg font-bold">{showText()}</span>
         </button>
     )
 }
 
-export default ChangeStatusButton
+export default PowerButton
